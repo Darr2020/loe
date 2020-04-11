@@ -86,8 +86,7 @@ export default {
 
 #sidebar .sidebar-header {
   padding: 20px;
-    box-shadow: 3px 3px 3px rgba(0, 0, 0, .3);
-
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, .3);
   background: #F3BD19;
 }
 
@@ -97,11 +96,11 @@ export default {
 
 #sidebar ul li a, 
 #sidebar ul li button{
-   padding: 10px;
-    font-size: 1.1em;
-    display: block;
-    text-decoration: none;
-    color:#fff;
+  padding: 10px;
+  font-size: 1.1em;
+  display: block;
+  text-decoration: none;
+  color:#fff;
 }
 
 #sidebar ul li a:hover,
@@ -110,9 +109,9 @@ export default {
   background: #fff;
 }
 
-a[data-toggle="collapse"] {
+/*a[data-toggle="collapse"] {
     position: relative;
-}
+}*/
 
 .dropdown-toggle::after {
     display: block;
@@ -125,7 +124,7 @@ a[data-toggle="collapse"] {
 .collapse > li > a {
     font-size: .95em !important;
     padding-left: 30px !important;
-    background: rgb(64, 176, 224);
+    background: rgb(187, 54, 118);
 }
 
 ul.CTAs { padding: 20px;   
