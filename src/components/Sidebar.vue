@@ -9,7 +9,9 @@
         </h3>
         <li> <b-link to="/">Inicio</b-link></li>
         <li> <b-link to="/about">¿Quienes somos?</b-link> </li>
-        <li>
+        <li> <b-link to="/busqueda/carreras-pnf">Carreras y PNF</b-link> </li>
+        <li> <b-link to="/busqueda/instituciones">Instituciones</b-link> </li>
+        <!--li>
           <b-button v-b-toggle.drop1 variant="white">
             <b-row align-h="between">
               <b-col cols="8" left>Carreras y PNF</b-col>
@@ -34,7 +36,7 @@
               <li> <b-link to="/">Buscar por estados</b-link> </li>
               <li> <b-link to="/">Búsqueda avanzada</b-link> </li>
           </b-collapse>
-        </li>
+        </li-->
         <li> <a href="#">Áreas prioritarias</a> </li>
         <li> <a href="#">Glosario</a> </li>
       </ul>
@@ -108,10 +110,6 @@ export default {
   color: rgb(192, 75, 132);
   background: #fff;
 }
-
-/*a[data-toggle="collapse"] {
-    position: relative;
-}*/
 
 .dropdown-toggle::after {
     display: block;

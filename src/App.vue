@@ -11,7 +11,7 @@
     components: {
       Principal
     }
-  }
+}
 </script>
 
 <style>
@@ -27,12 +27,10 @@ p {
   color: #474747;
 }
 
-a,
-a:hover,
-a:focus {
-    color: inherit;
-    text-decoration: none;
-    transition: all 0.3s;
+a, a:hover, a:focus {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.3s;
 }
 
 </style>

@@ -10,7 +10,10 @@
                         <b-icon-chevron-right></b-icon-chevron-right>
                     </span>
                 </b-button>
-                <b-navbar-nav class="ml-auto">
+                <b-navbar-nav v-if="pathSearch == true" class="mr-auto">
+                       <InputSearch class="SearchMap"/>
+                </b-navbar-nav>
+                <b-navbar-nav class="ml-auto">  
                     <b-link to="/">Sistema Nacional de Ingreso</b-link>
                 </b-navbar-nav>
             </b-container>
@@ -18,23 +21,30 @@
     </div>
 </template>
 <script>
-export default {
-    data() {
-        return {
-            icon: true
-        }
-    },
-    methods:{
-        addClass(){            
-            this.$emit('addClass');
-            this.icon = false;
+    import InputSearch from '@/components/busqueda/InputSearch.vue'
+    import { mapState } from 'vuex'
+    export default {
+        components:{
+            InputSearch,
+        },
+        data() {
+            return {
+                icon: true
+            }
+        },
+        methods:{
+            addClass(){            
+                this.$emit('addClass');
+                this.icon = false;
+            }
+        },
+        computed: {
+            ...mapState(['pathSearch'])
         }
     }
-}
 </script>
 
 <style>
-
 .navbar {
     padding: 15px 15px;
     height: 55px;
@@ -47,12 +57,14 @@ export default {
 
 .navbar-nav a{ 
     color: #fff;
-  font-size: 1.19em;
-  font-weight: 400;
-  line-height: 1.7em;
+    font-size: 1.19em;
+    font-weight: 400;
+    line-height: 1.7em;
 }
 
 .navbar-nav a:hover{ color: #fff } 
-
+@media (max-width: 425px){
+    .navbar{ height: 130px }
+}
 
 </style>
