@@ -3,13 +3,14 @@
         <div class="col-xs-12 form-inline">
             <div class="form-group">
                 <label for="filter" class="sr-only">Filtros</label>
-                <input type="text" class="form-control" v-model="filter" placeholder="Filtros de búsqueda" @keydown="$event.stopImmediatePropagation()">
+                <input type="text" class="form-control" v-model="filter" placeholder="Buscar carreras" @keydown="$event.stopImmediatePropagation()">
             </div>
         </div>
 
-        <div class="col-xs-12 table-responsive">
+        <div class="col-xs-12 table table-hover table-responsive">
             <datatable :columns="columns" :data="rows" :filter="filter" :per-page="20"></datatable>
-            <datatable-pager v-model="page"></datatable-pager>
+            <datatable-pager v-model="page" ></datatable-pager>
+
         </div>
     </div>
 </template>
