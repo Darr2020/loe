@@ -11,32 +11,7 @@
         <li> <b-link to="/about">¿Quienes somos?</b-link> </li>
         <li> <b-link to="/busqueda/carreras-pnf">Carreras y PNF</b-link> </li>
         <li> <b-link to="/busqueda/instituciones">Instituciones</b-link> </li>
-        <!--li>
-          <b-button v-b-toggle.drop1 variant="white">
-            <b-row align-h="between">
-              <b-col cols="8" left>Carreras y PNF</b-col>
-              <b-col cols="3"><b-icon-chevron-down></b-icon-chevron-down></b-col>
-            </b-row>  
-          </b-button>
-          <b-collapse id="drop1">
-              <li> <b-link to="/">Por áreas de conocimiento</b-link> </li>
-              <li> <b-link to="/">Búsqueda avanzada</b-link> </li>
-              <li> <b-link to="/">Programaas de misión Sucre</b-link> </li>
-          </b-collapse>
-        </li>
-        <li>
-          <b-button v-b-toggle.drop2 variant="white">
-            <b-row align-h="between">
-              <b-col cols="7">Instituciones</b-col>
-              <b-col cols="3"><b-icon-chevron-down></b-icon-chevron-down></b-col>
-            </b-row>  
-          </b-button>
-          <b-collapse id="drop2">
-              <li> <b-link to="/">Buscar por regiones</b-link> </li>
-              <li> <b-link to="/">Buscar por estados</b-link> </li>
-              <li> <b-link to="/">Búsqueda avanzada</b-link> </li>
-          </b-collapse>
-        </li-->
+        
         <li> <a href="#">Áreas prioritarias</a> </li>
         <li> <a href="#">Glosario</a> </li>
       </ul>

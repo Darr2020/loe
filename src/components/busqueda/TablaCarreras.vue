@@ -1,15 +1,14 @@
 <template>
     <div class="row">
         <div class="col-xs-12 form-inline">
-            <div class="form-group">
-                <label for="filter" class="sr-only">Filtros</label>
+            <form class="form-group">
                 <input type="text" class="form-control" v-model="filter" placeholder="Buscar carreras" @keydown="$event.stopImmediatePropagation()">
-            </div>
+            </form>
         </div>
 
         <div class="col-xs-12 table table-hover table-responsive">
-            <datatable :columns="columns" :data="rows" :filter="filter" :per-page="20"></datatable>
-            <datatable-pager v-model="page" ></datatable-pager>
+            <datatable :columns="columns" :data="rows" :filter="filter" :per-page="15"></datatable>
+            <datatable-pager v-model="page" type="long"></datatable-pager>
 
         </div>
     </div>
@@ -24,9 +23,8 @@ export default {
             columns: [
                 {label: 'Nombre', field: 'nombre'},
                 {label: 'Titulo', field: 'titulo', headerClass: 'class-in-header second-class'},
-                {label: 'Periodo', field: 'periodicidad'},
-                {label: 'Duración', field: 'duracion'},
-                {label: 'Area de conocimiento', field: 'area_conocimiento'}
+                {label: 'Universidad', field: 'localidad.ieu.institucion_ministerial.nombre'},
+                {label: 'Localidad', field: 'localidad.municipio'},
             ],
             page: 1,
         }
@@ -41,7 +39,6 @@ export default {
                     this.messageNull = 'Disculpe, en estos momentos no hay carreras registradas'
                 }else{
                     this.rows = await dates.data.results;
-
                 }
             } catch (error) {
                 console.log('error', error);    

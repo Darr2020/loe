@@ -1,0 +1,1 @@
+.sub-title[data-v-204771eb]{color:#2da7db}ol li[data-v-204771eb],p[data-v-204771eb],ul[data-v-204771eb]{font-size:17px}ol li[data-v-204771eb]{list-style-type:none;counter-increment:list;position:relative}ol li[data-v-204771eb]:before{content:counter(list) ")";left:-32px;position:absolute;text-align:right;width:26px}

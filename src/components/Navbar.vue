@@ -10,8 +10,8 @@
                         <b-icon-chevron-right></b-icon-chevron-right>
                     </span>
                 </b-button>
-                <b-navbar-nav v-if="pathSearch == true" class="mr-auto">
-                       <InputSearch class="SearchMap"/>
+                <b-navbar-nav v-if="inputSearch == true" class="mr-auto">
+                       <FormSearch class="SearchMap"/>
                 </b-navbar-nav>
                 <b-navbar-nav class="ml-auto">  
                     <b-link to="/">Sistema Nacional de Ingreso</b-link>
@@ -21,11 +21,11 @@
     </div>
 </template>
 <script>
-    import InputSearch from '@/components/busqueda/InputSearch.vue'
+    import FormSearch from '@/components/busqueda/FormSearch.vue'
     import { mapState } from 'vuex'
     export default {
         components:{
-            InputSearch,
+            FormSearch,
         },
         data() {
             return {
@@ -39,7 +39,7 @@
             }
         },
         computed: {
-            ...mapState(['pathSearch'])
+            ...mapState(['inputSearch'])
         }
     }
 </script>

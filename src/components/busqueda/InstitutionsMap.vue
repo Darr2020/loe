@@ -6,7 +6,7 @@
                     <b-card-text>prueba</b-card-text>
                 </b-tab>
                 <b-tab title="Mapa">
-                   <Map></Map>
+                   <Map/>
                 </b-tab>
             </b-tabs>
         </b-card>

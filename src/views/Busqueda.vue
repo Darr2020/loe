@@ -4,18 +4,14 @@
     </div>
 </template>
 <script>
-import navbar from '@/components/Navbar.vue'
 import { mapMutations } from 'vuex'
 
 export default {
-    components: {
-        navbar
-    },
     methods: {
-       ...mapMutations(['changeNav'])
+       ...mapMutations(['showInputNav'])
     },
     mounted(){
-       this.changeNav()
+       this.showInputNav()
     }
 }
 </script>

@@ -1,51 +1,85 @@
 <template>
-  <div style="height: 540px; width: 100%">
-    <l-map
-      v-if="showMap"          
-      :zoom="zoom"
-      :center="center"
-      :options="mapOptions"
-      style="height: 100%"
-      @update:center="centerUpdate"
-      @update:zoom="zoomUpdate">
-      <l-tile-layer :url="url"/>
+  <l-map style="height: 490px" :zoom="zoom" :center="center">
+    <l-tile-layer :url="url"></l-tile-layer>
+    <l-control-attribution position="topright" prefix="Libro de oportunidades de estudio"></l-control-attribution>  
+    <l-circle-marker
+      :lat-lng="circle.center"
+      :radius="circle.radius"
+      :color="circle.color">
+        <l-popup>Universidad central de venezuela</l-popup>
+      </l-circle-marker>
+    </l-map>
+</template>
+
+<script>
+import {LMap, LTileLayer, LCircleMarker, LControlAttribution, LPopup} from 'vue2-leaflet';
+
+export default {
+  components: {
+    LMap,
+    LTileLayer,
+    LCircleMarker,
+    LControlAttribution,
+    LPopup
+  },
+  data () {
+    return {
+      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      zoom: 5.5,
+      center: [8.655767, -66.354306],
+      circle: {
+        center: [10.4883555,-66.8913583],
+        radius: 6,
+        color: '#C22974'
+      },
+    };
+  }
+}
+
+</script-->
+
+<!--template>
+  <div>
+    <l-map style="height: 490px" :zoom="zoom" :center="center">
+    <l-tile-layer :url="url"></l-tile-layer>
+    <l-control-attribution position="topright" prefix="Libro de oportunidades de estudio"></l-control-attribution>  
+    <l-circle-marker
+      :lat-lng="circle.center"
+      :radius="circle.radius"
+      :color="circle.color">
+        <l-popup>Universidad central de venezuela</l-popup>
+      </l-circle-marker>
+      <!--LGeosearch :options="geosearchOptions" ></LGeosearch>
     </l-map>
   </div>
 </template>
 
 <script>
-import { latLng } from "leaflet";
-import { LMap, LTileLayer, LMarker, LPopup, LTooltip } from "vue2-leaflet";
+import {LMap, LTileLayer, LCircleMarker, LControlAttribution, LPopup} from 'vue2-leaflet';
+import { OpenStreetMapProvider } from 'leaflet-geosearch';
+import LGeosearch from 'vue2-leaflet-geosearch';
 
 export default {
-  name: "Example",
-  components: {
+  components: { LGeosearch, 
     LMap,
     LTileLayer,
-    LMarker,
-    LPopup,
-    LTooltip
-  },
+    LCircleMarker,
+    LControlAttribution,
+    LPopup },
   data() {
     return {
-      zoom: 5.5 ,
-      center: latLng(8.655767, -66.354306),          
-      url: 'sd',//'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      currentZoom: 5.5,
-      currentCenter: latLng(47.41322, -1.219482),
-      mapOptions: {
-        zoomSnap: 0.5
+      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      zoom: 5.5,
+      center: [8.655767, -66.354306],
+      circle: {
+        center: [10.4883555,-66.8913583],
+        radius: 6,
+        color: '#C22974'
       },
-      showMap: true
+      geosearchOptions: { // Important part Here
+        provider: new OpenStreetMapProvider(),
+      },
     };
   },
-  methods: {
-    zoomUpdate(zoom) {
-      this.currentZoom = zoom;
-    },
-    centerUpdate(center) {
-      this.currentCenter = center;
-    }
-  }
 };
-</script>
+</script-->

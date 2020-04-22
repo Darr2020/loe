@@ -7,11 +7,18 @@
 <script>
 
 import CardsHome from '@/components/CardsHome.vue'
+import { mapMutations } from 'vuex'
 
   export default {
     name: 'Home',
     components: {
       CardsHome
+    },
+     methods: {
+       ...mapMutations(['hideInputNav'])
+    },
+    mounted(){
+       this.hideInputNav()
     }
   }
 </script>

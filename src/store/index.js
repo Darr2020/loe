@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import VueRouter from 'vue-router'
 
 Vue.use(Vuex)
 
@@ -20,7 +21,7 @@ const movies = () => {
 
 export default new Vuex.Store({
   state: {
-    pathSearch: false,
+    inputSearch: false,
     movies: movies(),
     filter: {
       query: '',
@@ -34,16 +35,11 @@ export default new Vuex.Store({
     SET_AVAILABLE(state){
       state.filter.available = ! state.filter.available;
     },
-    changeNav(state){
-      state.pathSearch = true;      
-      /*if (this.$route.path == '/busqueda') {
-        alert('busqueda')
-        state.pathSearch = true
-        console.log(state.pathSearch)
-      } else {
-        alert('no')
-      }*/
-
+    showInputNav(state){
+      state.inputSearch = true    
+    },
+    hideInputNav(state){
+      state.inputSearch = false;    
     }
   },
   getters: {
