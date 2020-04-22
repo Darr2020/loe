@@ -35,6 +35,18 @@
   </div>
 </template>
 
+<script>
+import { mapMutations } from 'vuex'
+export default {
+  methods: {
+      ...mapMutations(['hideInputNavCarreras'])
+    },
+    mounted(){
+      this.hideInputNavCarreras()
+    }
+}
+</script>
+
 <style scoped>
 
 .sub-title{ color: #2da7db; }

@@ -5,7 +5,6 @@
 </template>
 
 <script>
-
 import CardsHome from '@/components/CardsHome.vue'
 import { mapMutations } from 'vuex'
 
@@ -14,11 +13,12 @@ import { mapMutations } from 'vuex'
     components: {
       CardsHome
     },
-     methods: {
-       ...mapMutations(['hideInputNav'])
+    methods: {
+      ...mapMutations(['hideInputNavCarreras', 'hideInputNavCarrerasInstitutions'])
     },
     mounted(){
-       this.hideInputNav()
+      this.hideInputNavCarreras()
+      this.hideInputNavInstitutions()
     }
   }
 </script>

@@ -1,55 +1,25 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import VueRouter from 'vue-router'
 
 Vue.use(Vuex)
-
-const movies = () => {
-  return [{
-    id: 1,
-    title: 'titulo1',
-    description: 'pelicula1',
-    available: true,
-  },
-  {
-    id: 2,
-    title: 'titulo2',
-    description: 'pelicula2',
-    available: false,
-  }]
-}
 
 export default new Vuex.Store({
   state: {
     inputSearch: false,
-    movies: movies(),
-    filter: {
-      query: '',
-      available: true
-    }
+    iconNavbar: false,
   },
   mutations: {
-    SET_QUERY(state, query){
-      state.filter.query = query;
-    },
-    SET_AVAILABLE(state){
-      state.filter.available = ! state.filter.available;
-    },
-    showInputNav(state){
+    showInputNavCarreras(state){ // MOSTRAR INPUT PARA BUSCAR CARRERAS
       state.inputSearch = true    
     },
-    hideInputNav(state){
+    hideInputNavCarreras(state){ // OCULTAR INPUT PARA BUSCAR CARRERAS  
       state.inputSearch = false;    
-    }
-  },
-  getters: {
-    filteredMovies(state){
-      let movies = state.movies.filter(movie => movie.available === state.filter.available);
-
-      if (state.filter.query.length > 2) {
-        return movies.filter(movie => movie.title.toLowerCase().includes(state.filter.query))
-      }
-      return movies;
+    },
+    showInputNavInstitutions(state){ // MOSTRAR INPUT PARA BUSCAR INSTITUCIONES 
+      state.inputSearch = true    
+    },
+    hideInputNavInstitutions(state){ // OCULTAR INPUT PARA BUSCAR INSTITUCIONES
+      state.inputSearch = false;    
     }
   },
   actions: {
