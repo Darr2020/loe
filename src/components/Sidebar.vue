@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav id="sidebar" addClass="sidebar">
+    <nav id="sidebar" class="active">
       <div class="sidebar-header">
         <h3>Libro de Oportunidades</h3>
       </div>
@@ -16,34 +16,14 @@
         <li> <a href="#">Glosario</a> </li>
       </ul>
 
-      <ul class="list-unstyled CTAs ">
+      <ul class="list-unstyled CTAs">
           <li> <a href="#" class="contact">Contacto</a> </li>
       </ul>
     </nav>
   </div>
 </template>
 <script>
-//import { mapState } from 'vuex'
-export default {
-  props: [
-    "active"
-  ],
-  data() {
-    return {
-      
-    }
-  },
-  methods: {
-   sidebar(){
-     
-      let sidebar = document.getElementById("sidebar");
-      sidebar.classList.toggle("active");
-    }
-  },
-  computed: {
-   
-  },
-}
+
 </script>
 <style >
 /* ---------------------------------------------------

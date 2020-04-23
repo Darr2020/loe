@@ -1,9 +1,9 @@
 <template>
     <div class="wrapper">
-        <Sidebar ></Sidebar>
+        <Sidebar/>
 
         <div id="content">
-            <Navbar @addClass="active"/>
+            <Navbar/>
             <transition name="slide-fade" mode="out-in">
                 <router-view/>
             </transition>
@@ -12,6 +12,7 @@
     </div>
 </template>
 <script>
+    import {mapMutations} from 'vuex'
     import Sidebar from '@/components/Sidebar.vue'
     import Navbar from '@/components/Navbar.vue'
     import Footer from '@/components/Footer.vue'
@@ -22,15 +23,11 @@ export default {
         Navbar, 
         Footer
     },
-    data() {
-        return {
-        }
-    },
     methods:{
-        active(){
-            let sidebar = document.getElementById("sidebar");
-            sidebar.classList.toggle("active");
-        }
+        ...mapMutations(['showSidebar_iconNav'])
+    },
+    mounted(){
+        this.showSidebar_iconNav()
     }
     
 }

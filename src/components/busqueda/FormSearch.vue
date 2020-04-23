@@ -1,11 +1,19 @@
 <template>
     <div>
-        <input type="search" id="" placeholder="Buscar carrera">
+        <form action="" v-if="searchInstitutions == true">
+            <input type="search" id="" placeholder="Buscar Institución">
+        </form>
+        <form v-else>
+            <input type="search" id="" placeholder="Buscar Carrera">
+        </form>
     </div>
 </template>
 <script>
+import {mapState} from 'vuex'
 export default {
-    
+    computed: {
+        ...mapState(['searchInstitutions'])
+    }
 }
 </script>
 
@@ -44,8 +52,8 @@ export default {
     }
 
     input[type=search]:focus{
-        width: 330px;
-        background: #fff url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 330px center;
+        width: 390px;
+        background: #fff url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 390px center;
     }
 
     input:-moz-placeholder{ color: #999 }
@@ -79,6 +87,5 @@ export default {
             background: #fff url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 150px center;
         }
     }
-
 </style>
     

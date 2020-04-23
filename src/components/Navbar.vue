@@ -2,12 +2,12 @@
     <div>
         <nav class="navbar navbar-expand-lg ">
             <b-container fluid>
-                <b-button variant="outline-light" @click="addClass">
-                    <span v-if="icon == true">
-                        <b-icon-chevron-left></b-icon-chevron-left>
+                <b-button variant="outline-light" @click="showSidebar_iconNav">
+                    <span v-if="iconNavbar == false">
+                        <b-icon-chevron-right></b-icon-chevron-right>                      
                     </span>
                     <span v-else>
-                        <b-icon-chevron-right></b-icon-chevron-right>
+                        <b-icon-chevron-left></b-icon-chevron-left>
                     </span>
                 </b-button>
                 <b-navbar-nav v-if="inputSearch == true" class="mr-auto">
@@ -22,24 +22,16 @@
 </template>
 <script>
     import FormSearch from '@/components/busqueda/FormSearch.vue'
-    import { mapState } from 'vuex'
+    import { mapState, mapMutations } from 'vuex'
     export default {
         components:{
             FormSearch,
         },
-        data() {
-            return {
-                icon: true
-            }
-        },
         methods:{
-            addClass(){            
-                this.$emit('addClass');
-                this.icon = false;
-            }
+            ...mapMutations(['showSidebar_iconNav'])
         },
         computed: {
-            ...mapState(['inputSearch'])
+            ...mapState(['inputSearch', 'iconNavbar'])
         }
     }
 </script>
