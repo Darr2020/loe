@@ -5,27 +5,50 @@
         <h3>Libro de Oportunidades</h3>
       </div>
       <ul class="components">
-        <h3 class="text-center">OPSU
-        </h3>
-        <li> <b-link to="/">Inicio</b-link></li>
-        <li> <b-link to="/about">¿Quienes somos?</b-link> </li>
-        <li> <b-link to="/busqueda/carreras-pnf">Carreras y PNF</b-link> </li>
-        <li> <b-link to="/busqueda/instituciones">Instituciones</b-link> </li>
-        
-        <li> <a href="#">Áreas prioritarias</a> </li>
-        <li> <a href="#">Glosario</a> </li>
-      </ul>
-
-      <ul class="list-unstyled CTAs">
-          <li> <a href="#" class="contact">Contacto</a> </li>
+        <h4 class="text-center">FILTRAR</h4>
+        <li>
+          <a>
+            <b-form-checkbox value="state">
+              Por estado
+            </b-form-checkbox>
+          </a>
+        </li>
+        <li>
+          <a>
+            <b-form-checkbox value="municipality">
+              Por municipio
+            </b-form-checkbox>
+          </a>
+        </li>
+        <li>
+          <a>
+            <b-form-checkbox value="parish">
+              Por parroquía
+            </b-form-checkbox>
+          </a>
+        </li>
+        <li>
+          <a>
+            <b-form-checkbox value="populatedCenter">
+              Por centro poblado
+            </b-form-checkbox>
+          </a>
+        </li>   
       </ul>
     </nav>
   </div>
 </template>
 <script>
-
+  export default {
+    data() {
+      return {
+        
+    }
+  },
+}
 </script>
-<style >
+
+<style>
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
@@ -79,27 +102,6 @@
     padding-left: 30px !important;
     background: rgb(187, 54, 118);
 }
-
-ul.CTAs { padding: 20px;   
- }
-
-ul.CTAs li .contact {
-    text-align: center;
-    font-size: 1.2em !important;
-    display: block;
-    margin-bottom: 5px;
-    background: #C22974;
-    border-radius: 0;
-    box-shadow: 3px 3px 3px rgba(0, 0, 0, .3);
-    color: #fff !important;
-}
-
-ul.CTAs li .contact:hover {
-  color: #C22974 !important;
-    transition: all 0.2s;
-
-}
-
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */

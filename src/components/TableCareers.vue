@@ -8,7 +8,7 @@
 
         <div class="col-xs-12 table table-hover table-responsive">
             <datatable :columns="columns" :data="rows" :filter="filter" :per-page="15"></datatable>
-            <datatable-pager v-model="page" type="long"></datatable-pager>
+            <datatable-pager v-model="page"></datatable-pager>
 
         </div>
     </div>
@@ -23,17 +23,18 @@ export default {
             columns: [
                 {label: 'Nombre', field: 'nombre'},
                 {label: 'Titulo', field: 'titulo', headerClass: 'class-in-header second-class'},
-                {label: 'Universidad', field: 'localidad.ieu.institucion_ministerial.nombre'},
+                {label: 'Universidad', field: 'localidad.ieu.nombre'},
                 {label: 'Localidad', field: 'localidad.municipio'},
             ],
             page: 1,
+            apiRequests: [],
         }
     },
     
     methods: {
         async getInstitutions(){            
             try {
-                let dates = await axios.get('http://loe.terna.net/api-v1/programa-academico/pre-grado/listar/')
+                const dates = await axios.get('http://loe.terna.net/api-v1/programa-academico/pre-grado/listar/')
 
                 if (dates.data.results.length == 0) {
                     this.messageNull = 'Disculpe, en estos momentos no hay carreras registradas'
@@ -47,8 +48,7 @@ export default {
     },
     mounted(){        
         this.getInstitutions();
-    }
-    
+    }    
 }
 </script>
 <style scoped>
