@@ -33,11 +33,11 @@ import axios from 'axios'
     },
     methods: {
       emitParishs() {
+        let self = this;        
 
-        if (this.filter_parish){
-          this.$emit('pariData', this.filter_parish);
+        if (self.filter_parish){
+          EventBus.$emit('parish_filter',self.filter_parish);
         }
-
       }      
     },
 }

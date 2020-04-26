@@ -24,44 +24,33 @@
 import EventBus from '../../bus'
 import axios from 'axios'
   export default {
-    props: ['states','municipality','parish'],   
+    props: ['states'],   
     data() {
       return {
         filter_states: [],
-        matriz: []
       }
     },
     methods: {
       emitStates(){
-
-        let self = this;
-        
-        if (self.matriz) 
-        {
-          self.matriz = [];
-          self.matriz.push(self.filter_states,self.municipality,self.parish);
-        }
-
-        EventBus.$emit('states_filter',self.matriz);
+        let self = this;        
+        EventBus.$emit('state_filter',self.filter_states);
 
         if (self.filter_states){
   
           let id_states = [];
 
-          for (var j = 0; j < self.filter_states.length; j++) {
-
+          for (var j = 0; j < self.filter_states.length; j++) 
+          {
             for (var i = 0; i < self.states.length; i++) {
               if(self.states[i].nombre == self.filter_states[j]) 
               { 
                 id_states.push(self.states[i].id)
               }
             }
-
           }
 
           self.$emit('enable', id_states);
         }
-
       },
     }
 }

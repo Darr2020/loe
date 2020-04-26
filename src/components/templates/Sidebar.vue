@@ -38,19 +38,15 @@
 
     <FilterModalState
       :states="states"
-      :municipality="filter_muni"
-      :parish="filter_pari"
       @enable="enable">
     </FilterModalState>
 
      <FilterModalMunicipality
-      :municipalitys="municipalitys"
-      @muniData="dataFilterMuni">
+      :municipalitys="municipalitys">
     </FilterModalMunicipality>
 
      <FilterModalParish
-      :parishs="parishs"
-      @pariData="dataFilterPari">
+      :parishs="parishs">
     </FilterModalParish>
 
   </div>
@@ -69,8 +65,6 @@ import axios from 'axios'
         states: [],
         municipalitys: [],   
         parishs: [],
-        filter_muni: [],
-        filter_pari: [],
         disabled: 'disabled'
       }
     },
@@ -80,14 +74,6 @@ import axios from 'axios'
       FilterModalParish
     },
     methods: {
-      dataFilterMuni(data) {
-        var me = this;
-        me.filter_muni = data;
-      },
-      dataFilterPari(data) {
-        var me = this;
-        me.filter_pari = data;
-      },
       enable(params) {
         
         if (params[0] != undefined) 

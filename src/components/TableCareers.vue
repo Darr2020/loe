@@ -38,34 +38,19 @@ export default {
         }
     },    
     methods: {
-        filters(data, states) {
+        filters(data, states,atribute) {
 
             let array = [];
-            console.log(states)
+            let attr = atribute;
 
             for (var j = 0; j < states.length; j++) {
 
                 for (var i = 0; i < data.length; i++) {
-                    if (data[i].localidad.estado == states[0][j]) 
-                    {
-                        if (states[1][j] != undefined) 
-                        {
-                            if (data[i].localidad.municipio == states[1][j]) 
-                            {
-                                if (states[2][j] != undefined) 
-                                {
-                                    if (data[i].localidad.parroquia == states[2][j]) 
-                                    {
-                                        array.push(data[i]);
-                                    }
-                                } else {
-                                    array.push(data[i]);
-                                }
-                            }
-                        } else {
-                            array.push(data[i]);
-                        }
+                    if (eval(attr) == states[j]) 
+                    {                        
+                        array.push(data[i]);
                     }
+                              
                 }
 
             }
@@ -89,12 +74,37 @@ export default {
                         me.rows = me.rowsData;
                     }
 
-                    EventBus.$on('states_filter', function (states) {
-                        if (states[0][0] != undefined) {                            
-                            me.bus = false;                            
-                            me.rows = me.filters(me.rowsData, states);
+                    EventBus.$on('state_filter', function (states) {
+                        if (states[0] != undefined) {                            
+                            var attr = 'data[i].localidad.estado';
+                            me.bus = false;
+                            me.rows = me.filters(me.rowsData, states,attr);
 
-                        } else if (states[0][0] == undefined) {
+                        } else if (states[0] == undefined) {
+                            me.bus = true;
+                            me.rows = me.rowsData;
+                        }
+                    });
+
+                    EventBus.$on('municipality_filter', function (municipality) {
+                        if (municipality[0] != undefined) {
+                            var attr = 'data[i].localidad.municipio';                           
+                            me.bus = false;                            
+                            me.rows = me.filters(me.rowsData, municipality, attr);
+
+                        } else if (municipality[0] == undefined) {
+                            me.bus = true;
+                            me.rows = me.rowsData;
+                        }
+                    });
+
+                    EventBus.$on('parish_filter', function (parish) {
+                        if (parish[0] != undefined) {
+                            var attr = 'data[i].localidad.parroquia';                            
+                            me.bus = false;                            
+                            me.rows = me.filters(me.rowsData, parish, attr);
+
+                        } else if (parish[0] == undefined) {
                             me.bus = true;
                             me.rows = me.rowsData;
                         }

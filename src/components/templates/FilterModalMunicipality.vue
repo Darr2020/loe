@@ -32,11 +32,11 @@ import axios from 'axios'
     },
     methods: {
       emitMunicipalitys() {
+        let self = this;        
 
-        if (this.filter_municipality){
-          this.$emit('muniData', this.filter_municipality);
+        if (self.filter_municipality){
+          EventBus.$emit('municipality_filter',self.filter_municipality);
         }
-
       }      
     },
 }
