@@ -63,9 +63,11 @@ import axios from 'axios'
     data() {
       return {
         states: [],
-        municipalitys: [],   
+        municipalitys: [],
+        municipalityAll: [],  
         parishs: [],
-        disabled: 'disabled'
+        parishAll: [],
+        disabled: '' /*revisar esta funcionalidad*/
       }
     },
     components: {
@@ -75,20 +77,16 @@ import axios from 'axios'
     },
     methods: {
       enable(params) {
-        
-        if (params[0] != undefined) 
+        if (params) 
         {
-
-          this.disabled = ''
-          this.getmunicipality(params);
-          this.getParish(params);
-
+          this.municipalitys = this.dataProcess(this.municipalityAll, params);
+          this.parishs = this.dataProcess(this.parishAll, params);
+          
         } else {
           
           this.disabled = 'disabled';
 
         }
-
       },
       dataProcess(data, filter) {
 
@@ -108,58 +106,47 @@ import axios from 'axios'
 
         return array;
       },
-      async getStates(){            
-            try {
-                const response = await axios.get('http://loe.terna.net/api-v1/estado/listar/')
+      async getSMP(url, datas, variable) {
+          try {
+              const response = await axios.get(url)
 
-                if (response.data.results.length == 0) {
-                    this.messageNull = 'Disculpe, en estos momentos no hay carreras registradas'
-                }else{
+              if (response.data.results.length == 0) {
+                  this.messageNull = 'Disculpe, en estos momentos no hay carreras registradas'
+              }else{
 
-                  this.states = await response.data.results; 
-
-                }
-            } catch (error) {
-                console.log('error', error);    
-            }
-        },
-        async getmunicipality(params){            
-            try {
-                const response = await axios.get('http://loe.terna.net/api-v1/municipio/listar/')
-
-                if (response.data.results.length == 0) {
-                    this.messageNull = 'Disculpe, en estos momentos no hay carreras registradas'
-                }else{
-
-                  let me = this;
-                  let municipality = await response.data.results;
-                  me.municipalitys = me.dataProcess(municipality, params);
-
-                }
-            } catch (error) {
-                console.log('error', error);    
-            }
-        },
-        async getParish(params){            
-            try {
-                const response = await axios.get('http://loe.terna.net/api-v1/parroquia/listar/')
-
-                if (response.data.results.length == 0) {
-                    this.messageNull = 'Disculpe, en estos momentos no hay carreras registradas'
-                }else{
+                let me = this;
+                const retrivedData = datas.concat(response.data.results)
+                
+                if (response.data.next !== null) {
+                  me.getSMP(response.data.next, retrivedData, variable);
+                } else {
+                  let allData = retrivedData;
                   
-                  let self = this;
-                  let parish = await response.data.results;
-                  self.parishs = self.dataProcess(parish, params);
-
+                  if (variable == 'states') {
+                    this.states = allData;
+                  } else if (variable == 'municipality') {
+                    this.municipalityAll = allData;
+                  } else if (variable == 'parish') {
+                    this.parishAll = allData
+                  }
                 }
-            } catch (error) {
-                console.log('error', error);    
-            }
-        }
+
+              }
+
+          } catch (error) {
+              console.log('error', error);    
+          }
+      },
+    },
+    created () {
+
+      this.getSMP('http://loe.terna.net/api-v1/estado/listar/', [], 'states');      
+      this.getSMP('http://loe.terna.net/api-v1/municipio/listar/', [], 'municipality');
+      this.getSMP('http://loe.terna.net/api-v1/parroquia/listar/', [], 'parish');
+
     },
     mounted () {
-      this.getStates();
+
     }
 
 }
