@@ -1,24 +1,43 @@
 <template>
     <div class="row">
-        <div class="col-xs-12 form-inline">
+        <!-- <div class="col-xs-12 form-inline">
             <form class="form-group">
                 <input type="text" class="form-control" v-model="filter" placeholder="Buscar carreras" @keydown="$event.stopImmediatePropagation()">
             </form>
-        </div>
+        </div> -->
         <br>
             {{ message }}
         <br>
-        <div class="col-xs-12 table table-hover table-responsive">
+        <!-- <div class="col-xs-12 table table-hover table-responsive">
             <datatable :columns="columns" :data="rows" :filter="filter" :per-page="25"></datatable>
-            <datatable-pager v-model="page"></datatable-pager>
-        </div>
+             <bootstrap-4-datatable-pager v-model="page"></bootstrap-4-datatable-pager>
+        </div> -->
+        <vue-good-table
+            title="Dynamic Table"
+            :columns="columns"
+            :rows="rows"
+            :lineNumbers="true"
+            :defaultSortBy="{field: 'titulo', type: 'asec'}"
+            :globalSearch="true"
+            :paginate="true"
+            :perPage="true"
+            styleClass="table condensed table-bordered table-striped">
+            <!-- <template slot="table-row" scope="props">
+                <td>{{ props.row.nombre }}</td>
+                <td class="fancy">{{ props.row.titulo }}</td>
+                <td>{{ props.formattedRow.nombre }}</td>
+                <td>{{ props.localidad.estado }}</td>
+            </template> -->
+        </vue-good-table>
     </div>
 </template>
 <script>
 
+import 'vuejs-datatable/dist/themes/bootstrap-4.esm';
 import EventBus from '../bus'
 import axios from 'axios'
 export default {
+     name: 'test',
      data() {
         return {
             filter:  '',
@@ -26,17 +45,39 @@ export default {
             rows: [],
             rowsData: [],
             columns: [
-                {label: 'Nombre', field: 'nombre'},
-                {label: 'Titulo', field: 'titulo'},
-                {label: 'Universidad', field: 'localidad.ieu.nombre'},
-                {label: 'Localidad',  representedAs: row => 
-                                        `${ row.localidad.estado },
-                                        ${ row.localidad.municipio }, 
-                                        ${ row.localidad.parroquia }`,
-                                        align: 'left',sortable: false},
+                {label: 'Nombre', field: 'nombre', filterable: true},
+                {label: 'Título', field: 'titulo', filterable: true},
+                {label: 'Universidad', field: 'localidad.ieu.nombre', filterable: true},
+                {label: 'Localidad', field: 'localidad.estado', filterable: true}
+                // {label: 'Age',
+                // field: 'age',
+                // type: 'number',
+                // html: false,
+                // filterable: true,
+                // },
+                // {
+                // label: 'Created On',
+                // field: 'createdAt',
+                // type: 'date',
+                // inputFormat: 'YYYYMMDD',
+                // outputFormat: 'MMM Do YY',
+                // },
+                // {
+                // label: 'Percent',
+                // field: 'score',
+                // type: 'percentage',
+                // html: false,
+                // },
+                
+                // {label: 'Nombre', field: 'nombre'},
+                // {label: 'Titulo', field: 'titulo'},
+                // {label: 'Universidad', field: 'localidad.ieu.nombre'},
+                // {label: 'Localidad',  representedAs: row => 
+                //                         `${ row.localidad.estado },
+                //                         ${ row.localidad.municipio }, 
+                //                         ${ row.localidad.parroquia }`,
+                //                         align: 'left',sortable: false},
             ],
-            page: 1,
-            apiRequests: [],
             message: ''
         }
     },    
@@ -134,5 +175,5 @@ export default {
 <style scoped>
     *{
         font-size: 13px;
-    }    
+    }
 </style>

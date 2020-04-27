@@ -67,7 +67,7 @@ import axios from 'axios'
         municipalityAll: [],  
         parishs: [],
         parishAll: [],
-        disabled: '' /*revisar esta funcionalidad*/
+        disabled: 'disabled'
       }
     },
     components: {
@@ -77,12 +77,13 @@ import axios from 'axios'
     },
     methods: {
       enable(params) {
-        if (params) 
+        if (params[0] != '') 
         {
           this.municipalitys = this.dataProcess(this.municipalityAll, params);
           this.parishs = this.dataProcess(this.parishAll, params);
+          this.disabled = '';
           
-        } else {
+        } else if (params[0] == '') {
           
           this.disabled = 'disabled';
 
