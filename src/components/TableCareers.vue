@@ -2,43 +2,54 @@
     <div class="row">
         <div class="col-12 text-center">
             <h1 class="h1" v-if="!message">Todas las Universidades</h1>
-            <h1 class="h1" v-if="message">{{ message }}</h1>
+            <h1 class="h1" v-else>{{ message }}</h1>
         </div>
-        <div class="col-12 form-inline">
-            <input type="text" class="form-control" v-model="filter" placeholder="Buscar carreras">
+        <div class="col-12" v-if="message">
+            <div id="preloader6">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-        <vue-good-table
-            title="Universidades"
-            id="table"
-            :columns="columns"
-            :rows="rows"
-            @on-cell-click="onCellClick"
-            styleClass="table condensed table-bordered table-hover"
-            :search-options="{
-                enabled: true,
-                trigger: 'enter',
-                skipDiacritics: true,
-                placeholder: 'Buscar carreras',
-                externalQuery: filter,
-                searchFn: myFunc
-            }"
-            :pagination-options="{
-                enabled: true,
-                mode: 'records',
-                perPageDropdown: [5, 10, 25],
-                perPage: 25,
-                dropdownAllowAll: false,
-                nextLabel: 'Siguiente',
-                prevLabel: 'Anterior',
-                rowsPerPageLabel: 'Filas por página',
-                ofLabel: 'de',
-            }">
-        </vue-good-table>
+        <div v-else class="col-12">
+            <div class="col-12 form-inline">
+                <input type="text" class="form-control" v-model="filter" placeholder="Buscar carreras">
+            </div>
 
-        <ModalUniversity
-            v-if="university != ''"
-            :university="university">
-        </ModalUniversity>
+            <vue-good-table
+                title="Universidades"
+                id="table"
+                :columns="columns"
+                :rows="rows"
+                @on-cell-click="onCellClick"
+                styleClass="table condensed table-bordered table-hover"
+                :search-options="{
+                    enabled: true,
+                    trigger: 'enter',
+                    skipDiacritics: true,
+                    placeholder: 'Buscar carreras',
+                    externalQuery: filter,
+                    searchFn: myFunc
+                }"
+                :pagination-options="{
+                    enabled: true,
+                    mode: 'records',
+                    perPageDropdown: [5, 10, 25],
+                    perPage: 25,
+                    dropdownAllowAll: false,
+                    nextLabel: 'Siguiente',
+                    prevLabel: 'Anterior',
+                    rowsPerPageLabel: 'Filas por página',
+                    ofLabel: 'de',
+                }">
+            </vue-good-table>
+
+            <ModalUniversity
+                v-if="university != ''"
+                :university="university">
+            </ModalUniversity>
+        </div>
 
     </div>
 </template>
@@ -177,5 +188,47 @@ export default {
     }
     #table {
         cursor: pointer
+    }
+    /* Animaciones de carga */
+    #preloader6{
+        position:relative;
+        width: 10vh;
+        height: 10vh;
+        margin: 3% 50% 3% 50%;
+        animation: preloader_6 5s infinite linear;
+    }
+    #preloader6 span{
+        width:20px;
+        height:20px;
+        position:absolute;
+        background:red;
+        display:block;
+        animation: preloader_6_span 1s infinite linear;
+    }
+    #preloader6 span:nth-child(1){
+    background:#2ecc71;
+    
+    }
+    #preloader6 span:nth-child(2){
+    left:22px;
+    background:#9b59b6;
+        animation-delay: .2s;
+    
+    }
+    #preloader6 span:nth-child(3){
+    top:22px;
+    background:#3498db;
+        animation-delay: .4s;
+    }
+    #preloader6 span:nth-child(4){
+    top:22px;
+    left:22px;
+    background:#f1c40f;
+        animation-delay: .6s;
+    }
+    @keyframes preloader_6_span {
+    0% { transform:scale(1); }
+    50% { transform:scale(0.5); }
+    100% { transform:scale(1); }
     }
 </style>
