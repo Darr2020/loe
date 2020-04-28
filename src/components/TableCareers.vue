@@ -1,87 +1,80 @@
 <template>
     <div class="row">
-        <!-- <div class="col-xs-12 form-inline">
-            <form class="form-group">
-                <input type="text" class="form-control" v-model="filter" placeholder="Buscar carreras" @keydown="$event.stopImmediatePropagation()">
-            </form>
-        </div> -->
-        <br>
-            {{ message }}
-        <br>
-        <!-- <div class="col-xs-12 table table-hover table-responsive">
-            <datatable :columns="columns" :data="rows" :filter="filter" :per-page="25"></datatable>
-             <bootstrap-4-datatable-pager v-model="page"></bootstrap-4-datatable-pager>
-        </div> -->
+        <div class="col-12 text-center">
+            <h1 class="h1" v-if="!message">Todas las Universidades</h1>
+            <h1 class="h1" v-if="message">{{ message }}</h1>
+        </div>
+        <div class="col-12 form-inline">
+            <input type="text" class="form-control" v-model="filter" placeholder="Buscar carreras">
+        </div>
         <vue-good-table
-            title="Dynamic Table"
+            title="Universidades"
+            id="table"
             :columns="columns"
             :rows="rows"
-            :lineNumbers="true"
-            :defaultSortBy="{field: 'titulo', type: 'asec'}"
-            :globalSearch="true"
-            :paginate="true"
-            :perPage="true"
-            styleClass="table condensed table-bordered table-striped">
-            <!-- <template slot="table-row" scope="props">
-                <td>{{ props.row.nombre }}</td>
-                <td class="fancy">{{ props.row.titulo }}</td>
-                <td>{{ props.formattedRow.nombre }}</td>
-                <td>{{ props.localidad.estado }}</td>
-            </template> -->
+            @on-cell-click="onCellClick"
+            styleClass="table condensed table-bordered table-hover"
+            :search-options="{
+                enabled: true,
+                trigger: 'enter',
+                skipDiacritics: true,
+                placeholder: 'Buscar carreras',
+                externalQuery: filter,
+                searchFn: myFunc
+            }"
+            :pagination-options="{
+                enabled: true,
+                mode: 'records',
+                perPageDropdown: [5, 10, 25],
+                perPage: 25,
+                dropdownAllowAll: false,
+                nextLabel: 'Siguiente',
+                prevLabel: 'Anterior',
+                rowsPerPageLabel: 'Filas por página',
+                ofLabel: 'de',
+            }">
         </vue-good-table>
+
+        <ModalUniversity
+            v-if="university != ''"
+            :university="university">
+        </ModalUniversity>
+
     </div>
 </template>
 <script>
 
-import 'vuejs-datatable/dist/themes/bootstrap-4.esm';
+import ModalUniversity from '@/components/ModalUniversity.vue'
 import EventBus from '../bus'
 import axios from 'axios'
 export default {
-     name: 'test',
      data() {
         return {
-            filter:  '',
+            filter: '',
             bus: true,
+            message: '',
+            university: [],
             rows: [],
             rowsData: [],
             columns: [
                 {label: 'Nombre', field: 'nombre', filterable: true},
-                {label: 'Título', field: 'titulo', filterable: true},
-                {label: 'Universidad', field: 'localidad.ieu.nombre', filterable: true},
-                {label: 'Localidad', field: 'localidad.estado', filterable: true}
-                // {label: 'Age',
-                // field: 'age',
-                // type: 'number',
-                // html: false,
-                // filterable: true,
-                // },
-                // {
-                // label: 'Created On',
-                // field: 'createdAt',
-                // type: 'date',
-                // inputFormat: 'YYYYMMDD',
-                // outputFormat: 'MMM Do YY',
-                // },
-                // {
-                // label: 'Percent',
-                // field: 'score',
-                // type: 'percentage',
-                // html: false,
-                // },
-                
-                // {label: 'Nombre', field: 'nombre'},
-                // {label: 'Titulo', field: 'titulo'},
-                // {label: 'Universidad', field: 'localidad.ieu.nombre'},
-                // {label: 'Localidad',  representedAs: row => 
-                //                         `${ row.localidad.estado },
-                //                         ${ row.localidad.municipio }, 
-                //                         ${ row.localidad.parroquia }`,
-                //                         align: 'left',sortable: false},
+                {label: 'Título', field: 'titulo', filterable: true, html: false},
+                {label: 'Universidad', field: 'localidad.ieu.nombre', filterable: true, html: true},
+                {label: 'Localidad', field: 'localidad.estado', filterable: true, html: false}
             ],
-            message: ''
         }
+    },
+    components: {
+        ModalUniversity
     },    
     methods: {
+        myFunc(row, col, cellValue, searchTerm){
+            return cellValue === 'my value';
+        },
+         onCellClick(params) {
+            this.university = params.row;
+            this.$bvModal.show('university')
+        },
         events (me,rowsData) {
 
             EventBus.$on('state_filter', function (states) {
@@ -113,16 +106,16 @@ export default {
             });
 
         },
-        filters(data, states,atribute) {
+        filters(data, obj,atribute) {
 
             let array = [];
             let attr = atribute;
 
-            for (var j = 0; j < states.length; j++) 
+            for (var j = 0; j < obj.length; j++) 
             {
                 for (var i = 0; i < data.length; i++) 
                 {
-                    if (eval(attr) == states[j]) 
+                    if (eval(attr) == obj[j]) 
                     {                        
                         array.push(data[i]);
                     }                              
@@ -147,7 +140,7 @@ export default {
                     
                     if (response.data.next !== null && institutions.length !== 1000) {
                         me.getInstitutions(response.data.next, retrivedInstitutions);
-                        me.message = 'loading register, please wait...';
+                        me.message = 'Cargando los registros, por favor espere... resultados: ' +retrivedInstitutions.length;
                     } else {
                         me.rowsData = retrivedInstitutions
                         me.message = '';
@@ -175,5 +168,14 @@ export default {
 <style scoped>
     *{
         font-size: 13px;
+    }
+    .h1 {
+        font-size: 20px !important;
+        background: beige;
+        font-weight: bold;
+        padding: 10px;
+    }
+    #table {
+        cursor: pointer
     }
 </style>

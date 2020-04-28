@@ -20,7 +20,6 @@
     "vue-router": "^3.1.5",
     "vue2-leaflet": "^2.5.2",
     "vue2-leaflet-geosearch": "^1.0.6",
-    "vuejs-datatable": "^2.0.0-alpha.7",
     "vuex": "^3.1.2"
   },
   "devDependencies": {
